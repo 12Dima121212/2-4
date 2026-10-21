@@ -26,6 +26,12 @@
           <div class="stat-value">{{ completedTasks }}</div>
           <div class="stat-label">Виконано</div>
         </div>
+
+        <div class="stat-card stat-card-pending">
+          <f7-icon f7="clock_fill" />
+          <div class="stat-value">{{ pendingTasks }}</div>
+          <div class="stat-label">Очікує виконання</div>
+          </div>
       </div>
 
       <div class="section-heading">
@@ -63,6 +69,7 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import AppTabbar from '../components/AppTabbar.vue';
 import { tasks } from '../data/tasks.js';
 
@@ -70,6 +77,10 @@ const totalTasks = computed(() => tasks.length);
 
 const completedTasks = computed(() =>
   tasks.filter(task => task.completed).length
+);
+
+const pendingTasks = computed(() =>
+  totalTasks.value - completedTasks.value
 );
 
 const recentTasks = computed(() =>
